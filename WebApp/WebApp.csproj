@@ -563,7 +563,6 @@
     <Content Include="Reporte\dsConsumo.xss">
       <DependentUpon>dsConsumo.xsd</DependentUpon>
     </Content>
-    <Content Include="Views\Bbcore\ReporteMovimientoBbCore2.cshtml" />
     <Content Include="Reporte\dsTransfu.xsc">
       <DependentUpon>dsTransfu.xsd</DependentUpon>
     </Content>

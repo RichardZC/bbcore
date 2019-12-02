@@ -11,15 +11,6 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult ReporteMovimientoBbCore(string hc)
-        {        
-            return View();
-        }       
-        public ActionResult ReporteMovimientoBbCore2(string hc)
-        {
-            return View();
-        }
-       
+        }        
     }
 }
