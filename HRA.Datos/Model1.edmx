@@ -57,17 +57,17 @@
             <Parameter Name="FINICIO" Mode="In" Type="DateTime" />
             <Parameter Name="FFINAL" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="ups_DATOS_PACIENTE" ReturnType="Collection(BBCORE1Model.ups_DATOS_PACIENTE_Result)">
+          <FunctionImport Name="usp_CANDIDATOS_DONACIONES_PACIENTE" ReturnType="Collection(BBCORE1Model.usp_CANDIDATOS_DONACIONES_PACIENTE_Result)">
           <Parameter Name="HISTORIA" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_CANDIDATOS_DONACIONES_PACIENTE" ReturnType="Collection(BBCORE1Model.usp_CANDIDATOS_DONACIONES_PACIENTE_Result)">
-            <Parameter Name="HISTORIA" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="usp_CANT_GLOBULOS_TRANSFUSION_PACIENTE" ReturnType="Collection(BBCORE1Model.usp_CANT_GLOBULOS_TRANSFUSION_PACIENTE_Result)">
-            <Parameter Name="num_procedimiento" Mode="In" Type="String" />
+          <Parameter Name="num_procedimiento" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_TRANSFUSIONES_PACIENTE" ReturnType="Collection(BBCORE1Model.usp_TRANSFUSIONES_PACIENTE_Result)">
-            <Parameter Name="NUM_PROCEDIMIENTO" Mode="In" Type="String" />
+          <Parameter Name="NUM_PROCEDIMIENTO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ups_DATOS_PACIENTE" ReturnType="Collection(BBCORE1Model.ups_DATOS_PACIENTE_Result)">
+            <Parameter Name="HISTORIA" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CONSUMO_DETALLE_Result">
@@ -102,13 +102,6 @@
           <Property Type="Int32" Name="RECHAZADOS" Nullable="true" />
           <Property Type="Int32" Name="RECHAZADOS_SEROLOGIA" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="ups_DATOS_PACIENTE_Result">
-          <Property Type="String" Name="t_doc" Nullable="true" MaxLength="3" />
-          <Property Type="String" Name="num_doc" Nullable="true" MaxLength="40" />
-          <Property Type="String" Name="num_proc" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="Gh" Nullable="true" MaxLength="4" />
-          <Property Type="String" Name="PACIENTE" Nullable="true" MaxLength="1002" />
-        </ComplexType>
         <ComplexType Name="usp_CANDIDATOS_DONACIONES_PACIENTE_Result">
           <Property Type="String" Name="CANDIDATO" Nullable="true" MaxLength="1002" />
           <Property Type="String" Name="N_PRE_DON" Nullable="true" MaxLength="10" />
@@ -129,6 +122,14 @@
           <Property Type="String" Name="GF" Nullable="true" MaxLength="4" />
           <Property Type="String" Name="UNIDAD2" Nullable="true" MaxLength="12" />
           <Property Type="DateTime" Name="F_TRANSFUSION" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ups_DATOS_PACIENTE_Result">
+          <Property Type="String" Name="t_doc" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="num_doc" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="num_proc" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Gh" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="PACIENTE" Nullable="true" MaxLength="1002" />
+          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -184,17 +185,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ups_DATOS_PACIENTE" FunctionName="BBCORE1Model.Store.ups_DATOS_PACIENTE">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BBCORE1Model.ups_DATOS_PACIENTE_Result">
-                <ScalarProperty Name="t_doc" ColumnName="t_doc" />
-                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
-                <ScalarProperty Name="num_proc" ColumnName="num_proc" />
-                <ScalarProperty Name="Gh" ColumnName="Gh" />
-                <ScalarProperty Name="PACIENTE" ColumnName="PACIENTE" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_CANDIDATOS_DONACIONES_PACIENTE" FunctionName="BBCORE1Model.Store.usp_CANDIDATOS_DONACIONES_PACIENTE">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BBCORE1Model.usp_CANDIDATOS_DONACIONES_PACIENTE_Result">
@@ -225,6 +215,18 @@
                 <ScalarProperty Name="GF" ColumnName="GF" />
                 <ScalarProperty Name="UNIDAD2" ColumnName="UNIDAD2" />
                 <ScalarProperty Name="F_TRANSFUSION" ColumnName="F_TRANSFUSION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ups_DATOS_PACIENTE" FunctionName="BBCORE1Model.Store.ups_DATOS_PACIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBCORE1Model.ups_DATOS_PACIENTE_Result">
+                <ScalarProperty Name="t_doc" ColumnName="t_doc" />
+                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
+                <ScalarProperty Name="num_proc" ColumnName="num_proc" />
+                <ScalarProperty Name="Gh" ColumnName="Gh" />
+                <ScalarProperty Name="PACIENTE" ColumnName="PACIENTE" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

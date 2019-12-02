@@ -20,9 +20,6 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        public ActionResult ListarProcedimientos(string hc)
-        {           
-            return View();
-        }
+       
     }
 }
