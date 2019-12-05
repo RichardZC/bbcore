@@ -547,6 +547,7 @@
     <Content Include="Reporte\dsCandidato.xsc">
       <DependentUpon>dsCandidato.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Reporte\dsCandidato.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
