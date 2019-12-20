@@ -17,6 +17,11 @@ namespace WebApp.Controllers
             var lista = ReporteBL.ListarDatosPaciente(pHc);
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ListarCandidatos(string pHc)
+        {
+            var lista = ReporteBL.ObtenerCandidatos(pHc);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ReporteMovimientoBbCore2(string proc, string hc)
         {
             var pacientes = ReporteBL.ListarDatosPaciente(hc);
@@ -25,13 +30,14 @@ namespace WebApp.Controllers
             var ObtenerCandidatos = ReporteBL.ObtenerCandidatos(hc);
             var rd = new ReportDataSource("dsTransfu", ObtenerTransfPacient);
             var rd1 = new ReportDataSource("dsCandidato", ObtenerCandidatos);
+
             var parametros = new List<ReportParameter>
                {
-                   new ReportParameter("t_doc", pacientes[0].t_doc),
-                   new ReportParameter("num_doc", pacientes[0].num_doc),
-                     new ReportParameter("num_proc", proc),
-                   new ReportParameter("Gh", pacientes[0].Gh),
-                   new ReportParameter("PACIENTE", pacientes[0].PACIENTE),
+                   new ReportParameter("t_doc", pacientes.Count>0? pacientes[0].t_doc:" "),
+                   new ReportParameter("num_doc", pacientes.Count>0? pacientes[0].num_doc:" "),
+                     new ReportParameter("num_proc",  proc=="0"?" ":proc),
+                   new ReportParameter("Gh", pacientes.Count>0?pacientes[0].Gh:" "),
+                   new ReportParameter("PACIENTE", pacientes.Count>0?pacientes[0].PACIENTE:" "),
                    new ReportParameter("GLOBULOS", ObtenerGlobTransf.Count >0? ObtenerGlobTransf[0].GLOBULOS.Value.ToString():"0"),
                    new ReportParameter("TRANSFUSION",ObtenerGlobTransf.Count >0? ObtenerGlobTransf[0].TRANSFUSION.Value.ToString():"0"),
                    new ReportParameter("Fecha", DateTime.Now.ToShortDateString())

@@ -74,17 +74,26 @@
                         var self = this;
                         $.get('@Url.Action("ListarProcedimiento", "Reporte")', { pHc: self.hc }, function (d) {
                             if (d.length == 1) {
-                                //Llamar el procedimiento
                                 window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=' + d[0].num_proc + '&hc=' + self.hc);
                                 self.Procedimientos = [];
                                 return;
                             }
                             if (d.length == 0) {
-                                Swal.fire(
-                                    'No existe',
-                                    'No existe procedimientos para esta historia',
-                                    'error'
-                                );
+                                $.get('@Url.Action("ListarCandidatos", "Reporte")', { pHc: self.hc }, function (d) {
+                                    if (d.length >= 1) {
+                                        window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=0&hc=' + self.hc);
+                                        self.Procedimientos = [];
+                                        return;
+                                    }
+                                    else {
+                                        Swal.fire(
+                                            'No existe',
+                                            'No existe procedimientos ni candidatos para esta historia',
+                                            'error'
+                                        );
+                                    }
+                                });
+
                             }
                             self.Procedimientos = d;
                         });
