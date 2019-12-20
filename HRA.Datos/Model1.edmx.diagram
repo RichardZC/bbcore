@@ -2,7 +2,10 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <edmx:Diagrams>
-      <Diagram DiagramId="91d1b0af1bf1410f9599407414b25f75" Name="Diagram1" />
+      <Diagram DiagramId="91d1b0af1bf1410f9599407414b25f75" Name="Diagram1" ZoomLevel="107" >
+        <EntityTypeShape EntityType="BBCORE1Model.Poblacion" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BBCORE1Model.V_Poblacion" Width="1.625" PointX="3.375" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
