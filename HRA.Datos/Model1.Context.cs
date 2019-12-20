@@ -27,6 +27,8 @@ namespace HRA.Datos
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Poblacion> Poblacion { get; set; }
+        public virtual DbSet<V_Poblacion> V_Poblacion { get; set; }
     
         public virtual ObjectResult<CONSUMO_DETALLE_Result> CONSUMO_DETALLE(string hISTORIA, Nullable<System.DateTime> fINICIO, Nullable<System.DateTime> fFINAL)
         {

@@ -2,7 +2,86 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx"> 
   <edmx:Runtime>
     <edmx:StorageModels>
-    <Schema Namespace="BBCORE1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BBCORE1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Poblacion">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="p_estado" Type="smallint" />
+          <Property Name="p_numero" Type="varchar" MaxLength="16" />
+          <Property Name="p_hl7_id" Type="varchar" MaxLength="30" />
+          <Property Name="p_tipo_doc" Type="varchar" MaxLength="3" />
+          <Property Name="p_numero_doc" Type="varchar" MaxLength="40" />
+          <Property Name="p_fecha_reg" Type="datetime" />
+          <Property Name="p_nombres" Type="varchar" MaxLength="50" />
+          <Property Name="p_apellido1" Type="varchar" MaxLength="50" />
+          <Property Name="p_apellido2" Type="varchar" MaxLength="50" />
+          <Property Name="p_fecha_nac" Type="datetime" />
+          <Property Name="p_pais_nac" Type="varchar" MaxLength="5" />
+          <Property Name="p_sexo" Type="varchar" MaxLength="1" />
+          <Property Name="p_ocu_id" Type="int" />
+          <Property Name="p_casa_dir" Type="varchar" MaxLength="100" />
+          <Property Name="p_casa_tel" Type="varchar" MaxLength="100" />
+          <Property Name="p_trabajo_dir" Type="varchar" MaxLength="100" />
+          <Property Name="p_trabajo_tel" Type="varchar" MaxLength="100" />
+          <Property Name="p_celular_tel" Type="varchar" MaxLength="100" />
+          <Property Name="p_foto" Type="image" />
+          <Property Name="p_email" Type="varchar" MaxLength="100" />
+          <Property Name="p_historia" Type="text" />
+          <Property Name="p_abo" Type="varchar" MaxLength="3" />
+          <Property Name="p_rh" Type="char" MaxLength="1" />
+          <Property Name="p_du" Type="char" MaxLength="1" />
+          <Property Name="p_rh_desde_du" Type="smallint" />
+          <Property Name="p_abo_inversa" Type="varchar" MaxLength="3" />
+          <Property Name="p_rh_inversa" Type="char" MaxLength="1" />
+          <Property Name="p_fenotipo" Type="varchar" MaxLength="15" />
+          <Property Name="p_genotipo_prob" Type="varchar" MaxLength="15" />
+          <Property Name="p_cuit" Type="varchar" MaxLength="15" />
+          <Property Name="p_predonante" Type="smallint" />
+          <Property Name="p_club_donantes" Type="smallint" />
+          <Property Name="p_receptor" Type="smallint" />
+          <Property Name="p_nota" Type="text" />
+          <Property Name="p_gf" Type="varchar" MaxLength="4" StoreGeneratedPattern="Computed" />
+          <Property Name="p_pas_id" Type="int" />
+          <Property Name="p_turno" Type="int" />
+          <Property Name="p_turno_fecha" Type="datetime" />
+          <Property Name="p_usr_id_turno" Type="int" />
+          <Property Name="p_afi_id" Type="smallint" />
+          <Property Name="p_institucion" Type="smallint" />
+          <Property Name="P_tra" Type="smallint" />
+          <Property Name="p_tra2" Type="smallint" />
+          <Property Name="p_firma" Type="image" />
+          <Property Name="p_recurrente" Type="smallint" />
+          <Property Name="p_apellidos" Type="varchar" MaxLength="150" />
+          <Property Name="p_distrito_id" Type="int" />
+          <Property Name="p_fecha_alta" Type="datetime" />
+          <Property Name="p_ocupacion" Type="varchar" MaxLength="150" />
+          <Property Name="o_sed_id" Type="int" />
+          <Property Name="p_sed_id" Type="int" />
+          <Property Name="p_sed_id_proceso" Type="int" />
+          <Property Name="p_test_irradiado" Type="int" />
+          <Property Name="p_test_filtrado" Type="int" />
+          <Property Name="p_test_lavado" Type="int" />
+          <Property Name="p_test_centrifugado" Type="int" />
+          <Property Name="p_procedencia" Type="varchar" MaxLength="250" />
+          <Property Name="p_ocupa" Type="varchar" MaxLength="150" />
+          <Property Name="p_e_civil" Type="varchar" MaxLength="150" />
+          <Property Name="p_l_nacimiento" Type="varchar" MaxLength="250" />
+          <Property Name="p_dis_prov_dpt" Type="varchar" MaxLength="350" />
+          <Property Name="p_viajes" Type="varchar" MaxLength="10" />
+          <Property Name="p_permanencia" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_Poblacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="1002" />
+          <Property Name="h_clinica" Type="varchar" MaxLength="40" />
+        </EntityType>
         <Function Name="CONSUMO_DETALLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="HISTORIA" Type="varchar" Mode="In" />
           <Parameter Name="FINICIO" Type="datetime" Mode="In" />
@@ -33,7 +112,16 @@
         <Function Name="usp_TRANSFUSIONES_PACIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NUM_PROCEDIMIENTO" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="BBCORE1ModelStoreContainer" />
+        <EntityContainer Name="BBCORE1ModelStoreContainer">
+          <EntitySet Name="Poblacion" EntityType="Self.Poblacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_Poblacion" EntityType="Self.V_Poblacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_Poblacion].[Id] AS [Id], 
+    [V_Poblacion].[nombre_completo] AS [nombre_completo], 
+    [V_Poblacion].[h_clinica] AS [h_clinica]
+    FROM [dbo].[V_Poblacion] AS [V_Poblacion]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -67,8 +155,10 @@
           <Parameter Name="NUM_PROCEDIMIENTO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ups_DATOS_PACIENTE" ReturnType="Collection(BBCORE1Model.ups_DATOS_PACIENTE_Result)">
-            <Parameter Name="HISTORIA" Mode="In" Type="String" />
+          <Parameter Name="HISTORIA" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Poblacion" EntityType="BBCORE1Model.Poblacion" />
+          <EntitySet Name="V_Poblacion" EntityType="BBCORE1Model.V_Poblacion" />
         </EntityContainer>
         <ComplexType Name="CONSUMO_DETALLE_Result">
           <Property Type="String" Name="UNIDAD" Nullable="true" MaxLength="12" />
@@ -131,6 +221,83 @@
           <Property Type="String" Name="PACIENTE" Nullable="true" MaxLength="1002" />
           <Property Type="String" Name="Fecha" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <EntityType Name="Poblacion">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p_estado" Type="Int16" />
+          <Property Name="p_numero" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="p_hl7_id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="p_tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="p_numero_doc" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="p_fecha_reg" Type="DateTime" Precision="3" />
+          <Property Name="p_nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_apellido1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_fecha_nac" Type="DateTime" Precision="3" />
+          <Property Name="p_pais_nac" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="p_sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="p_ocu_id" Type="Int32" />
+          <Property Name="p_casa_dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_casa_tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_trabajo_dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_trabajo_tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_celular_tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="p_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_historia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="p_abo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="p_rh" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="p_du" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="p_rh_desde_du" Type="Int16" />
+          <Property Name="p_abo_inversa" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="p_rh_inversa" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="p_fenotipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="p_genotipo_prob" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="p_cuit" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="p_predonante" Type="Int16" />
+          <Property Name="p_club_donantes" Type="Int16" />
+          <Property Name="p_receptor" Type="Int16" />
+          <Property Name="p_nota" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="p_gf" Type="String" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="p_pas_id" Type="Int32" />
+          <Property Name="p_turno" Type="Int32" />
+          <Property Name="p_turno_fecha" Type="DateTime" Precision="3" />
+          <Property Name="p_usr_id_turno" Type="Int32" />
+          <Property Name="p_afi_id" Type="Int16" />
+          <Property Name="p_institucion" Type="Int16" />
+          <Property Name="P_tra" Type="Int16" />
+          <Property Name="p_tra2" Type="Int16" />
+          <Property Name="p_firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="p_recurrente" Type="Int16" />
+          <Property Name="p_apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="p_distrito_id" Type="Int32" />
+          <Property Name="p_fecha_alta" Type="DateTime" Precision="3" />
+          <Property Name="p_ocupacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="o_sed_id" Type="Int32" />
+          <Property Name="p_sed_id" Type="Int32" />
+          <Property Name="p_sed_id_proceso" Type="Int32" />
+          <Property Name="p_test_irradiado" Type="Int32" />
+          <Property Name="p_test_filtrado" Type="Int32" />
+          <Property Name="p_test_lavado" Type="Int32" />
+          <Property Name="p_test_centrifugado" Type="Int32" />
+          <Property Name="p_procedencia" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="p_ocupa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="p_e_civil" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="p_l_nacimiento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="p_dis_prov_dpt" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="p_viajes" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="p_permanencia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_Poblacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="h_clinica" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_completo" Type="String" MaxLength="1002" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -230,6 +397,85 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Poblacion">
+            <EntityTypeMapping TypeName="BBCORE1Model.Poblacion">
+              <MappingFragment StoreEntitySet="Poblacion">
+                <ScalarProperty Name="p_permanencia" ColumnName="p_permanencia" />
+                <ScalarProperty Name="p_viajes" ColumnName="p_viajes" />
+                <ScalarProperty Name="p_dis_prov_dpt" ColumnName="p_dis_prov_dpt" />
+                <ScalarProperty Name="p_l_nacimiento" ColumnName="p_l_nacimiento" />
+                <ScalarProperty Name="p_e_civil" ColumnName="p_e_civil" />
+                <ScalarProperty Name="p_ocupa" ColumnName="p_ocupa" />
+                <ScalarProperty Name="p_procedencia" ColumnName="p_procedencia" />
+                <ScalarProperty Name="p_test_centrifugado" ColumnName="p_test_centrifugado" />
+                <ScalarProperty Name="p_test_lavado" ColumnName="p_test_lavado" />
+                <ScalarProperty Name="p_test_filtrado" ColumnName="p_test_filtrado" />
+                <ScalarProperty Name="p_test_irradiado" ColumnName="p_test_irradiado" />
+                <ScalarProperty Name="p_sed_id_proceso" ColumnName="p_sed_id_proceso" />
+                <ScalarProperty Name="p_sed_id" ColumnName="p_sed_id" />
+                <ScalarProperty Name="o_sed_id" ColumnName="o_sed_id" />
+                <ScalarProperty Name="p_ocupacion" ColumnName="p_ocupacion" />
+                <ScalarProperty Name="p_fecha_alta" ColumnName="p_fecha_alta" />
+                <ScalarProperty Name="p_distrito_id" ColumnName="p_distrito_id" />
+                <ScalarProperty Name="p_apellidos" ColumnName="p_apellidos" />
+                <ScalarProperty Name="p_recurrente" ColumnName="p_recurrente" />
+                <ScalarProperty Name="p_firma" ColumnName="p_firma" />
+                <ScalarProperty Name="p_tra2" ColumnName="p_tra2" />
+                <ScalarProperty Name="P_tra" ColumnName="P_tra" />
+                <ScalarProperty Name="p_institucion" ColumnName="p_institucion" />
+                <ScalarProperty Name="p_afi_id" ColumnName="p_afi_id" />
+                <ScalarProperty Name="p_usr_id_turno" ColumnName="p_usr_id_turno" />
+                <ScalarProperty Name="p_turno_fecha" ColumnName="p_turno_fecha" />
+                <ScalarProperty Name="p_turno" ColumnName="p_turno" />
+                <ScalarProperty Name="p_pas_id" ColumnName="p_pas_id" />
+                <ScalarProperty Name="p_gf" ColumnName="p_gf" />
+                <ScalarProperty Name="p_nota" ColumnName="p_nota" />
+                <ScalarProperty Name="p_receptor" ColumnName="p_receptor" />
+                <ScalarProperty Name="p_club_donantes" ColumnName="p_club_donantes" />
+                <ScalarProperty Name="p_predonante" ColumnName="p_predonante" />
+                <ScalarProperty Name="p_cuit" ColumnName="p_cuit" />
+                <ScalarProperty Name="p_genotipo_prob" ColumnName="p_genotipo_prob" />
+                <ScalarProperty Name="p_fenotipo" ColumnName="p_fenotipo" />
+                <ScalarProperty Name="p_rh_inversa" ColumnName="p_rh_inversa" />
+                <ScalarProperty Name="p_abo_inversa" ColumnName="p_abo_inversa" />
+                <ScalarProperty Name="p_rh_desde_du" ColumnName="p_rh_desde_du" />
+                <ScalarProperty Name="p_du" ColumnName="p_du" />
+                <ScalarProperty Name="p_rh" ColumnName="p_rh" />
+                <ScalarProperty Name="p_abo" ColumnName="p_abo" />
+                <ScalarProperty Name="p_historia" ColumnName="p_historia" />
+                <ScalarProperty Name="p_email" ColumnName="p_email" />
+                <ScalarProperty Name="p_foto" ColumnName="p_foto" />
+                <ScalarProperty Name="p_celular_tel" ColumnName="p_celular_tel" />
+                <ScalarProperty Name="p_trabajo_tel" ColumnName="p_trabajo_tel" />
+                <ScalarProperty Name="p_trabajo_dir" ColumnName="p_trabajo_dir" />
+                <ScalarProperty Name="p_casa_tel" ColumnName="p_casa_tel" />
+                <ScalarProperty Name="p_casa_dir" ColumnName="p_casa_dir" />
+                <ScalarProperty Name="p_ocu_id" ColumnName="p_ocu_id" />
+                <ScalarProperty Name="p_sexo" ColumnName="p_sexo" />
+                <ScalarProperty Name="p_pais_nac" ColumnName="p_pais_nac" />
+                <ScalarProperty Name="p_fecha_nac" ColumnName="p_fecha_nac" />
+                <ScalarProperty Name="p_apellido2" ColumnName="p_apellido2" />
+                <ScalarProperty Name="p_apellido1" ColumnName="p_apellido1" />
+                <ScalarProperty Name="p_nombres" ColumnName="p_nombres" />
+                <ScalarProperty Name="p_fecha_reg" ColumnName="p_fecha_reg" />
+                <ScalarProperty Name="p_numero_doc" ColumnName="p_numero_doc" />
+                <ScalarProperty Name="p_tipo_doc" ColumnName="p_tipo_doc" />
+                <ScalarProperty Name="p_hl7_id" ColumnName="p_hl7_id" />
+                <ScalarProperty Name="p_numero" ColumnName="p_numero" />
+                <ScalarProperty Name="p_estado" ColumnName="p_estado" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Poblacion">
+            <EntityTypeMapping TypeName="BBCORE1Model.V_Poblacion">
+              <MappingFragment StoreEntitySet="V_Poblacion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="h_clinica" ColumnName="h_clinica" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
