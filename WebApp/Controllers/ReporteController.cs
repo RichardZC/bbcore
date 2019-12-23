@@ -12,6 +12,11 @@ namespace WebApp.Controllers
 {
     public class ReporteController : Controller
     {
+        public ActionResult ListarProcedimientos_Por_Unidad(string Und)
+        {
+            var lista = ReporteBL.ListarProc_HC_Por_Unidad(Und);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ListarProcedimiento(string pHc)
         {
             var lista = ReporteBL.ListarDatosPaciente(pHc);

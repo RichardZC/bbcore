@@ -125,5 +125,14 @@ namespace HRA.Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ups_DATOS_PACIENTE_Result>("ups_DATOS_PACIENTE", hISTORIAParameter);
         }
+    
+        public virtual ObjectResult<usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result> usp_BUSCAR_NUMPROC_HC_X_UNIDAD(string uNIDAD)
+        {
+            var uNIDADParameter = uNIDAD != null ?
+                new ObjectParameter("UNIDAD", uNIDAD) :
+                new ObjectParameter("UNIDAD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result>("usp_BUSCAR_NUMPROC_HC_X_UNIDAD", uNIDADParameter);
+        }
     }
 }

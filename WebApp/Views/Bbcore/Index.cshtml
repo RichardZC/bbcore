@@ -16,15 +16,55 @@
                                 <div class="row">
                                     <div class="input-field col s8">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="icon_prefix3" type="text" v-on:keyup.enter="CargarProcedimientos(hc)" v-model="hc" name="hc" value="" placeholder="Ingrese H.C" class="validate" autofocus>
+                                        <input id="icon_prefix3" type="text" v-on:keyup.enter="BuscarDatos(hc)" v-model="hc" name="hc" value="" placeholder="Ingrese H.C" class="validate" autofocus>
                                         <label for="icon_prefix3" class="">Historia Clinica</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="view-icon-prefixes" class="active">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="input-field col s8">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="icon_prefix3" type="text" v-on:keyup.enter="BuscarDatos(hc)" v-model="unidad" name="unidad" value="" placeholder="Ingrese Unidad" class="validate" autofocus>
+                                        <label for="icon_prefix3" class="">unidad</label>
                                     </div>
                                     <div class="input-field col s3">
                                         <div class="form-actions no-color">
-                                            <input type="button" v-on:click="CargarProcedimientos(hc)" value="Buscar" class="btn btn-small" />
+                                            <input type="button" v-on:click="BuscarDatos(hc)" value="Buscar" class="btn btn-small" />
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div id="view-icon-prefixes" class="active">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="input-field col s8">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="icon_prefix4" type="text" v-on:keyup.enter="BuscarDatos(hc)" v-model="nombre_buscado" name="nombre_buscado" value="" placeholder="Ingrese Apellidos y Nombres" class="validate">
+                                        <label for="icon_prefix4" class="">Apellidos y nombres</label>
+                                    </div>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Paciente</th>
+                                            <th>Historia Clinica</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="paciente in pacientes">
+                                            <td>
+                                                {{ paciente.nombre_completo }}
+                                            </td>
+                                            <td>
+                                                <a href="#" v-on:click="BuscarDatos(paciente.h_clinica)">{{ paciente.h_clinica }}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -55,53 +95,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6">
-                <div id="icon-prefixes" class="card card-tabs">
-                    <div class="card-content">
-                        <div class="card-title">
-                            <div class="row">
-                                <div class="col s12">
-                                    <h4 class="card-title"  style="font-size:small" >Control de Transfusión de Pacientes - BBCORE</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="view-icon-prefixes" class="active">
-                            <div class="row">
-                                <div class="row">
-                                    <div class="input-field col s8">
-                                        <i class="material-icons prefix">account_circle</i>
-                                        <input id="icon_prefix4" type="text" v-on:keyup.enter="buscarPaciente()" v-model="nombre_buscado" name="nombre_buscado" value="" placeholder="Ingrese Apellidos y Nombres" class="validate">
-                                        <label for="icon_prefix4" class="">Apellidos y nombres</label>
-                                    </div>
-                                    <div class="input-field col s3">
-                                        <div class="form-actions no-color">
-                                            <input type="button" v-on:click="buscarPaciente()" value="Buscar" class="btn btn-small" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Paciente</th>
-                                            <th>Historia Clinica</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="paciente in pacientes">
-                                            <td>
-                                                {{ paciente.nombre_completo }}
-                                            </td>
-                                            <td>
-                                                <a href="#" v-on:click="CargarProcedimientos(paciente.h_clinica)">{{ paciente.h_clinica }}</a> 
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -117,24 +110,76 @@
                     nombre_buscado: "",
                     Procedimientos: [],
                     pacientes: [],
-                    num_proc:""
+                    unidad: "",
+                    //num_proc:""
                 },
                 methods: {
-                    CargarProcedimientos: function (numdocumento) {
+                    BuscarDatos: function (numdocumento) {
                         var self = this;
-                       // console.log(hc);
-                       $.get('@Url.Action("ListarProcedimiento", "Reporte")', { pHc: numdocumento }, function (d) {
+
+                        if (numdocumento == "") {//Si la caja de texto historia clinica no tiene datos ingresados
+
+                            if (self.nombre_buscado == "" & self.unidad=="") {//Si la caja de texto nombre_buscado no tiene datos ingresados
+                            Swal.fire(
+                                            'Faltan Datos',
+                                            'Ingrese datos a buscar',
+                                            'error'
+                                );
+                               
+                            } else {
+                                if (self.nombre_buscado!="") { //Se ingreso un nombre a buscar
+                                                $.get('@Url.Action("BuscarPaciente", "Bbcore")', { clave: self.nombre_buscado }, function (d) {
+                                            self.pacientes = d;
+                                            self.hc = "";
+                                            self.Procedimientos = [];
+                                         });
+                                }
+                                if (self.unidad!="") {//Se ingresó la UNIDAD a buscar
+                                   $.get('@Url.Action("ListarProcedimientos_Por_Unidad", "Reporte")', { Und: self.unidad }, function (u) {
+                                    if (u.length == 1) {//Lunidad solo tiene un procedimiento
+                                    //Llamar el procedimiento
+                                    window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=' + u[0].num_proc + '&hc=' + u[0].num_doc);
+                                    self.Procedimientos = [];
+                                    self.pacientes = [];
+                                    self.nombre_buscado = "";
+                                    return;
+                                    }
+                                    if (u.length == 0) {//Si no hay registros que mostrar para la unidad ingresada
+                                        Swal.fire(
+                                            'No existe',
+                                            'No existe procedimientos para la unidad ingresada',
+                                            'error'
+                                        );
+                                    }
+                                   if (u.length>1) {//Si hay mas de un resultado
+                                       self.Procedimientos = u;
+                                       self.pacientes = [];
+                                       self.nombre_buscado = "";
+                                   }
+                                });
+                                }
+
+                            }
+
+                        }
+                        else {//Hay una historia clinica abuscar para generar REPORTE
+                               $.get('@Url.Action("ListarProcedimiento", "Reporte")', { pHc: numdocumento }, function (d) {
                             if (d.length == 1) {
                                 //Llamar el procedimiento
                                 window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=' + d[0].num_proc + '&hc=' + numdocumento);
                                 self.Procedimientos = [];
+                               // self.pacientes = [];
+                                self.nombre_buscado = "";
+
                                 return;
                             }
                             if (d.length == 0) {
-                                $.get('@Url.Action("ListarCandidatos", "Reporte")', { pHc: self.hc }, function (d) {
-                                    if (d.length >= 1) {
-                                        window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=0&hc=' + self.hc);
+                                $.get('@Url.Action("ListarCandidatos", "Reporte")', { pHc: numdocumento }, function (p) {
+                                    if (p.length >= 1) {
+                                        window.open('@Url.Action("ReporteMovimientoBbCore2","Reporte")?proc=0&hc=' + numdocumento);
                                         self.Procedimientos = [];
+                                       // self.pacientes = [];
+                                       self.nombre_buscado = "";
                                         return;
                                     }
                                     else {
@@ -146,17 +191,16 @@
                                     }
                                 });
 
-                            }
-                            self.Procedimientos = d;
+                               }
+                                   if (d.length>1) {
+                                       self.Procedimientos = d;
+                                       self.pacientes = [];
+                                       self.nombre_buscado = "";
+                                   }
+
                         });
-                        
+                        }
                     },
-                    buscarPaciente: function () {
-                        var self = this;
-                        $.get('@Url.Action("BuscarPaciente", "Bbcore")', { clave: self.nombre_buscado }, function (d) {
-                            self.pacientes = d;
-                        });
-                    }
                 }
             });
     </script>

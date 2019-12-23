@@ -47,7 +47,14 @@ namespace HRA.Negocio
             using (var db = new BBCORE1Entities())
             {
                 return db.ups_DATOS_PACIENTE(hc).ToList();
-            }           
+            }
+        }
+        public static List<Datos.usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result> ListarProc_HC_Por_Unidad(string unidad)
+        {
+            using (var db = new BBCORE1Entities())
+            {
+                return db.usp_BUSCAR_NUMPROC_HC_X_UNIDAD(unidad).ToList();
+            }
         }
         public static List<Datos.usp_CANT_GLOBULOS_TRANSFUSION_PACIENTE_Result> ObtenerGlobTransf(string hc)
         {
