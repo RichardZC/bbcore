@@ -78,7 +78,7 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre_completo" Type="varchar" MaxLength="1001" />
           <Property Name="h_clinica" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -140,9 +140,6 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
             <Parameter Name="FINICIO" Mode="In" Type="DateTime" />
             <Parameter Name="FFINAL" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="CONSUMO_PACIENTE" ReturnType="Collection(BBCORE1Model.CONSUMO_PACIENTE_Result)">
-          <Parameter Name="HISTORIA" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="CONSUMO_RESUMEN_DONANTES" ReturnType="Collection(BBCORE1Model.CONSUMO_RESUMEN_DONANTES_Result)">
             <Parameter Name="HISTORIA" Mode="In" Type="String" />
             <Parameter Name="FINICIO" Mode="In" Type="DateTime" />
@@ -157,13 +154,16 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <FunctionImport Name="usp_TRANSFUSIONES_PACIENTE" ReturnType="Collection(BBCORE1Model.usp_TRANSFUSIONES_PACIENTE_Result)">
           <Parameter Name="NUM_PROCEDIMIENTO" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ups_DATOS_PACIENTE" ReturnType="Collection(BBCORE1Model.ups_DATOS_PACIENTE_Result)">
-          <Parameter Name="HISTORIA" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Poblacion" EntityType="BBCORE1Model.Poblacion" />
           <EntitySet Name="V_Poblacion" EntityType="BBCORE1Model.V_Poblacion" />
           <FunctionImport Name="usp_BUSCAR_NUMPROC_HC_X_UNIDAD" ReturnType="Collection(BBCORE1Model.usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result)">
-            <Parameter Name="UNIDAD" Mode="In" Type="String" />
+          <Parameter Name="UNIDAD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSUMO_PACIENTE" ReturnType="Collection(BBCORE1Model.CONSUMO_PACIENTE_Result)">
+            <Parameter Name="HISTORIA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ups_DATOS_PACIENTE" ReturnType="Collection(BBCORE1Model.ups_DATOS_PACIENTE_Result)">
+            <Parameter Name="HISTORIA" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CONSUMO_DETALLE_Result">
@@ -186,11 +186,6 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <Property Type="Int32" Name="PLASMA" Nullable="true" />
           <Property Type="Int32" Name="CRIO" Nullable="true" />
           <Property Type="Int32" Name="AFERESIS" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="CONSUMO_PACIENTE_Result">
-          <Property Type="String" Name="HISTORIA" Nullable="true" MaxLength="40" />
-          <Property Type="String" Name="POSTULANTE" Nullable="true" MaxLength="1002" />
-          <Property Type="String" Name="ABO" Nullable="true" MaxLength="4" />
         </ComplexType>
         <ComplexType Name="CONSUMO_RESUMEN_DONANTES_Result">
           <Property Type="Int32" Name="POSTULANTES" Nullable="true" />
@@ -218,14 +213,6 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <Property Type="String" Name="GF" Nullable="true" MaxLength="4" />
           <Property Type="String" Name="UNIDAD2" Nullable="true" MaxLength="12" />
           <Property Type="DateTime" Name="F_TRANSFUSION" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="ups_DATOS_PACIENTE_Result">
-          <Property Type="String" Name="t_doc" Nullable="true" MaxLength="3" />
-          <Property Type="String" Name="num_doc" Nullable="true" MaxLength="40" />
-          <Property Type="String" Name="num_proc" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="Gh" Nullable="true" MaxLength="4" />
-          <Property Type="String" Name="PACIENTE" Nullable="true" MaxLength="1002" />
-          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="20" />
         </ComplexType>
         <EntityType Name="Poblacion">
           <Key>
@@ -305,9 +292,23 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <ComplexType Name="usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result">
+          <Property Type="String" Name="nombre_completo" Nullable="true" MaxLength="1002" />
           <Property Type="String" Name="t_doc" Nullable="true" MaxLength="3" />
           <Property Type="String" Name="num_doc" Nullable="true" MaxLength="40" />
           <Property Type="String" Name="num_proc" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="CONSUMO_PACIENTE_Result">
+          <Property Type="String" Name="HISTORIA" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="POSTULANTE" Nullable="true" MaxLength="1002" />
+          <Property Type="String" Name="ABO" Nullable="true" MaxLength="4" />
+        </ComplexType>
+        <ComplexType Name="ups_DATOS_PACIENTE_Result">
+          <Property Type="String" Name="t_doc" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="num_doc" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="num_proc" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Gh" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="nombre_completo" Nullable="true" MaxLength="1002" />
           <Property Type="String" Name="Fecha" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
@@ -342,15 +343,6 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
                 <ScalarProperty Name="PLASMA" ColumnName="PLASMA" />
                 <ScalarProperty Name="CRIO" ColumnName="CRIO" />
                 <ScalarProperty Name="AFERESIS" ColumnName="AFERESIS" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CONSUMO_PACIENTE" FunctionName="BBCORE1Model.Store.CONSUMO_PACIENTE">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BBCORE1Model.CONSUMO_PACIENTE_Result">
-                <ScalarProperty Name="HISTORIA" ColumnName="HISTORIA" />
-                <ScalarProperty Name="POSTULANTE" ColumnName="POSTULANTE" />
-                <ScalarProperty Name="ABO" ColumnName="ABO" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -394,18 +386,6 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
                 <ScalarProperty Name="GF" ColumnName="GF" />
                 <ScalarProperty Name="UNIDAD2" ColumnName="UNIDAD2" />
                 <ScalarProperty Name="F_TRANSFUSION" ColumnName="F_TRANSFUSION" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ups_DATOS_PACIENTE" FunctionName="BBCORE1Model.Store.ups_DATOS_PACIENTE">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BBCORE1Model.ups_DATOS_PACIENTE_Result">
-                <ScalarProperty Name="t_doc" ColumnName="t_doc" />
-                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
-                <ScalarProperty Name="num_proc" ColumnName="num_proc" />
-                <ScalarProperty Name="Gh" ColumnName="Gh" />
-                <ScalarProperty Name="PACIENTE" ColumnName="PACIENTE" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -491,9 +471,31 @@ advertencia 6002: La tabla o vista 'BBCORE.dbo.V_Poblacion' no tiene definida ni
           <FunctionImportMapping FunctionImportName="usp_BUSCAR_NUMPROC_HC_X_UNIDAD" FunctionName="BBCORE1Model.Store.usp_BUSCAR_NUMPROC_HC_X_UNIDAD">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BBCORE1Model.usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result">
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
                 <ScalarProperty Name="t_doc" ColumnName="t_doc" />
                 <ScalarProperty Name="num_doc" ColumnName="num_doc" />
                 <ScalarProperty Name="num_proc" ColumnName="num_proc" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSUMO_PACIENTE" FunctionName="BBCORE1Model.Store.CONSUMO_PACIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBCORE1Model.CONSUMO_PACIENTE_Result">
+                <ScalarProperty Name="HISTORIA" ColumnName="HISTORIA" />
+                <ScalarProperty Name="POSTULANTE" ColumnName="POSTULANTE" />
+                <ScalarProperty Name="ABO" ColumnName="ABO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ups_DATOS_PACIENTE" FunctionName="BBCORE1Model.Store.ups_DATOS_PACIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBCORE1Model.ups_DATOS_PACIENTE_Result">
+                <ScalarProperty Name="t_doc" ColumnName="t_doc" />
+                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
+                <ScalarProperty Name="num_proc" ColumnName="num_proc" />
+                <ScalarProperty Name="Gh" ColumnName="Gh" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </ComplexTypeMapping>
             </ResultMapping>

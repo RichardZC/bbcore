@@ -40,9 +40,9 @@ namespace WebApp.Controllers
                {
                    new ReportParameter("t_doc", pacientes.Count>0? pacientes[0].t_doc:" "),
                    new ReportParameter("num_doc", pacientes.Count>0? pacientes[0].num_doc:" "),
-                     new ReportParameter("num_proc",  proc=="0"?" ":proc),
+                   new ReportParameter("num_proc",  proc=="0"?" ":proc),
                    new ReportParameter("Gh", pacientes.Count>0?pacientes[0].Gh:" "),
-                   new ReportParameter("PACIENTE", pacientes.Count>0?pacientes[0].PACIENTE:" "),
+                   new ReportParameter("PACIENTE", pacientes.Count>0?pacientes[0].nombre_completo:" "),
                    new ReportParameter("GLOBULOS", ObtenerGlobTransf.Count >0? ObtenerGlobTransf[0].GLOBULOS.Value.ToString():"0"),
                    new ReportParameter("TRANSFUSION",ObtenerGlobTransf.Count >0? ObtenerGlobTransf[0].TRANSFUSION.Value.ToString():"0"),
                    new ReportParameter("Fecha", DateTime.Now.ToShortDateString())

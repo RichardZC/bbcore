@@ -17,7 +17,7 @@ namespace HRA.Datos
         public string num_doc { get; set; }
         public string num_proc { get; set; }
         public string Gh { get; set; }
-        public string PACIENTE { get; set; }
+        public string nombre_completo { get; set; }
         public string Fecha { get; set; }
     }
 }

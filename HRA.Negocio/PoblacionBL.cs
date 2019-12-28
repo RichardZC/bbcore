@@ -21,14 +21,14 @@ namespace HRA.Negocio
                 if (cadena.Count() == 1)
                 {
                     par1 = cadena[0];
-                    lista = db.V_Poblacion.Where(x => x.nombre_completo.StartsWith(par1))
+                    lista = db.V_Poblacion.Where(x => x.nombre_completo.Contains(par1))
                             .OrderBy(x => x.nombre_completo).Take(50).ToList();
                 }
                 if (cadena.Count() == 2)
                 {
                     par1 = cadena[0];
                     par2 = cadena[1];
-                    lista = db.V_Poblacion.Where(x => x.nombre_completo.StartsWith(par1) 
+                    lista = db.V_Poblacion.Where(x => x.nombre_completo.Contains(par1) 
                                             && x.nombre_completo.Contains(par2))
                                             .OrderBy(x => x.nombre_completo).Take(50).ToList();
                 }
@@ -37,7 +37,7 @@ namespace HRA.Negocio
                     par1 = cadena[0];
                     par2 = cadena[1];
                     par3 = cadena[2];
-                    lista = db.V_Poblacion.Where(x => x.nombre_completo.StartsWith(par1)
+                    lista = db.V_Poblacion.Where(x => x.nombre_completo.Contains(par1)
                                             && x.nombre_completo.Contains(par2)
                                             && x.nombre_completo.Contains(par3))
                                             .OrderBy(x => x.nombre_completo).Take(50).ToList();
@@ -48,7 +48,7 @@ namespace HRA.Negocio
                     par2 = cadena[1];
                     par3 = cadena[2];
                     par4 = cadena[3];
-                    lista = db.V_Poblacion.Where(x => x.nombre_completo.StartsWith(par1)
+                    lista = db.V_Poblacion.Where(x => x.nombre_completo.Contains(par1)
                                             && x.nombre_completo.Contains(par2)
                                             && x.nombre_completo.Contains(par3)
                                             && x.nombre_completo.Contains(par4))

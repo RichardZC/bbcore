@@ -13,6 +13,7 @@ namespace HRA.Datos
     
     public partial class usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result
     {
+        public string nombre_completo { get; set; }
         public string t_doc { get; set; }
         public string num_doc { get; set; }
         public string num_proc { get; set; }

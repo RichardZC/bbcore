@@ -64,15 +64,6 @@ namespace HRA.Datos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSUMO_DETALLE_RESUMEN_Result>("CONSUMO_DETALLE_RESUMEN", hISTORIAParameter, fINICIOParameter, fFINALParameter);
         }
     
-        public virtual ObjectResult<CONSUMO_PACIENTE_Result> CONSUMO_PACIENTE(string hISTORIA)
-        {
-            var hISTORIAParameter = hISTORIA != null ?
-                new ObjectParameter("HISTORIA", hISTORIA) :
-                new ObjectParameter("HISTORIA", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSUMO_PACIENTE_Result>("CONSUMO_PACIENTE", hISTORIAParameter);
-        }
-    
         public virtual ObjectResult<CONSUMO_RESUMEN_DONANTES_Result> CONSUMO_RESUMEN_DONANTES(string hISTORIA, Nullable<System.DateTime> fINICIO, Nullable<System.DateTime> fFINAL)
         {
             var hISTORIAParameter = hISTORIA != null ?
@@ -117,15 +108,6 @@ namespace HRA.Datos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_TRANSFUSIONES_PACIENTE_Result>("usp_TRANSFUSIONES_PACIENTE", nUM_PROCEDIMIENTOParameter);
         }
     
-        public virtual ObjectResult<ups_DATOS_PACIENTE_Result> ups_DATOS_PACIENTE(string hISTORIA)
-        {
-            var hISTORIAParameter = hISTORIA != null ?
-                new ObjectParameter("HISTORIA", hISTORIA) :
-                new ObjectParameter("HISTORIA", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ups_DATOS_PACIENTE_Result>("ups_DATOS_PACIENTE", hISTORIAParameter);
-        }
-    
         public virtual ObjectResult<usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result> usp_BUSCAR_NUMPROC_HC_X_UNIDAD(string uNIDAD)
         {
             var uNIDADParameter = uNIDAD != null ?
@@ -133,6 +115,24 @@ namespace HRA.Datos
                 new ObjectParameter("UNIDAD", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_BUSCAR_NUMPROC_HC_X_UNIDAD_Result>("usp_BUSCAR_NUMPROC_HC_X_UNIDAD", uNIDADParameter);
+        }
+    
+        public virtual ObjectResult<CONSUMO_PACIENTE_Result> CONSUMO_PACIENTE(string hISTORIA)
+        {
+            var hISTORIAParameter = hISTORIA != null ?
+                new ObjectParameter("HISTORIA", hISTORIA) :
+                new ObjectParameter("HISTORIA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSUMO_PACIENTE_Result>("CONSUMO_PACIENTE", hISTORIAParameter);
+        }
+    
+        public virtual ObjectResult<ups_DATOS_PACIENTE_Result> ups_DATOS_PACIENTE(string hISTORIA)
+        {
+            var hISTORIAParameter = hISTORIA != null ?
+                new ObjectParameter("HISTORIA", hISTORIA) :
+                new ObjectParameter("HISTORIA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ups_DATOS_PACIENTE_Result>("ups_DATOS_PACIENTE", hISTORIAParameter);
         }
     }
 }
